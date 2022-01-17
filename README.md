@@ -8,9 +8,6 @@ pip install -r requirements.txt
 ```
 
 ## API Register & Login
-In a RESTful API, endpoints (URLs) define the structure of the API and how end users access data from our application using the HTTP methods - GET, POST, PUT, DELETE. Endpoints should be logically organized around _collections_ and _elements_, both of which are resources.
-
-In our case, we have one single resource, `movies`, so we will use the following URLS - `/movies/` and `/movies/<id>` for collections and elements, respectively:
 
 Endpoint |HTTP Method | CRUD Method | Result
 -- | -- |-- |--
@@ -18,22 +15,16 @@ Endpoint |HTTP Method | CRUD Method | Result
 `user/register` | POST | READ | Create an user
 
 ## API Product
-In a RESTful API, endpoints (URLs) define the structure of the API and how end users access data from our application using the HTTP methods - GET, POST, PUT, DELETE. Endpoints should be logically organized around _collections_ and _elements_, both of which are resources.
 
-In our case, we have one single resource, `movies`, so we will use the following URLS - `/movies/` and `/movies/<id>` for collections and elements, respectively:
-
-Endpoint |HTTP Method | CRUD Method | Result | EXAMPLE POST DATA
+Endpoint |HTTP Method | CRUD Method | Result
 -- | -- |-- |--|--
-`api/product` | GET | READ | Get all products | -
-`api/product/:id` | GET | READ | Get a single product | -
-`api/product`| POST | CREATE | Create a new product | ```{name="Triasse Paket MCU Premium",code="TPMP001",price=765000,testtype="Premium"}```
-`api/product/:id` | PUT | UPDATE | Update a product | ```{name="Triasse Paket MCU Update"}```,```{price=10000}```
-`api/product/:id` | DELETE | DELETE | Delete a product | -
+`api/product` | GET | READ | Get all products
+`api/product/:id` | GET | READ | Get a single product
+`api/product`| POST | CREATE | Create a new product
+`api/product/:id` | PUT | UPDATE | Update a product
+`api/product/:id` | DELETE | DELETE | Delete a product
 
 ## API Transaction
-In a RESTful API, endpoints (URLs) define the structure of the API and how end users access data from our application using the HTTP methods - GET, POST, PUT, DELETE. Endpoints should be logically organized around _collections_ and _elements_, both of which are resources.
-
-In our case, we have one single resource, `movies`, so we will use the following URLS - `/movies/` and `/movies/<id>` for collections and elements, respectively:
 
 Endpoint |HTTP Method | CRUD Method | Result
 -- | -- |-- |--
@@ -70,7 +61,7 @@ http http://127.0.0.1:8000/api/product/2 "Authorization: Bearer eyJ0eXAiOiJKV1Qi
 we get the movie with id = 3
 ```
 {	
-	"id": 3,
+    "id": 3,
     "name": "Triasse Paket MCU Premium",
     "testtype": "Premium",
     "code": "TPMP001",
@@ -114,49 +105,35 @@ and we will get a new access token
 }
 ```
 
-
-The API has some restrictions:
--   The movies are always associated with a creator (user who created it).
--   Only authenticated users may create and see movies.
--   Only the creator of a movie may update or delete it.
--   The API doesn't allow unauthenticated requests.
-
-### Commands
+## Commands
+### API Product
 ```
-Get all movies
-http http://127.0.0.1:8000/api/v1/movies/ "Authorization: Bearer {YOUR_TOKEN}" 
-Get a single movie
-http GET http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" 
-Create a new movie
-http POST http://127.0.0.1:8000/api/v1/movies/ "Authorization: Bearer {YOUR_TOKEN}" title="Ant Man and The Wasp" genre="Action" year=2018 
-Full update a movie
-http PUT http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" title="AntMan and The Wasp" genre="Action" year=2018
-Partial update a movie
-http PATCH http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" title="AntMan and The Wasp" 
-Delete a movie
-http DELETE http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}"
+Get all product
+http http://127.0.0.1:8000/api/product/ "Authorization: Bearer {YOUR_TOKEN}" 
+Get a single product
+http GET http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}" 
+Create a new product
+http POST http://127.0.0.1:8000/api/product/ "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket MCU Premium" code="TPMP001" price=765000 testtype="Premium"} 
+Full update a product
+http PUT http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket Basic" code="TPMP002" price=100000 testtype="Basic"}
+Partial update a product
+http PATCH http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket Basic"} 
+Delete a product
+http DELETE http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}"
 ```
-
-### Pagination
-The API supports pagination, by default responses have a page_size=10 but if you want change that you can pass through params page_size={your_page_size_number}
+### API Transaction
 ```
-http http://127.0.0.1:8000/api/v1/movies/?page=1 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?page=3 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?page=3&page_size=15 "Authorization: Bearer {YOUR_TOKEN}"
-```
-
-### Filters
-The API supports filtering, you can filter by the attributes of a movie like this
-```
-http http://127.0.0.1:8000/api/v1/movies/?title="AntMan" "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?year=2020 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?year__gt=2019&year__lt=2022 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?genre="Action" "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?creator__username="myUsername" "Authorization: Bearer {YOUR_TOKEN}"
+Get all transaction
+http http://127.0.0.1:8000/api/transaction/ "Authorization: Bearer {YOUR_TOKEN}" 
+Get a single transaction
+http GET http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}" 
+Create a new transaction
+http POST http://127.0.0.1:8000/api/transaction/ "Authorization: Bearer {YOUR_TOKEN}" array({productid=2 orderquantity=10},{productid=3 orderquantity=5}) 
+Full update a transaction
+http PUT http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {userid=1 totalprice=100000}
+Partial update a transaction
+http PATCH http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {userid=1}
+Delete a transaction
+http DELETE http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}"
 ```
 
-You can also combine multiples filters like so
-```
-http http://127.0.0.1:8000/api/v1/movies/?title="AntMan"&year=2020 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?year__gt=2019&year__lt=2022&genre="Action" "Authorization: Bearer {YOUR_TOKEN}"
-```
