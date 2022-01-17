@@ -26,8 +26,8 @@ Endpoint |HTTP Method | CRUD Method | Result | EXAMPLE POST DATA
 -- | -- |-- |--|--
 `api/product` | GET | READ | Get all products | -
 `api/product/:id` | GET | READ | Get a single product | -
-`api/product`| POST | CREATE | Create a new product | '''{name="Triasse Paket MCU Premium",code="TPMP001",price=765000,testtype="Premium"}'''
-`api/product/:id` | PUT | UPDATE | Update a product | '''{name="Triasse Paket MCU Update"}''','''{price=10000}'''
+`api/product`| POST | CREATE | Create a new product | ```{name="Triasse Paket MCU Premium",code="TPMP001",price=765000,testtype="Premium"}```
+`api/product/:id` | PUT | UPDATE | Update a product | ```{name="Triasse Paket MCU Update"}```,```{price=10000}```
 `api/product/:id` | DELETE | DELETE | Delete a product | -
 
 ## API Transaction
