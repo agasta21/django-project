@@ -17,7 +17,7 @@ Endpoint |HTTP Method | CRUD Method | Result
 ## API Product
 
 Endpoint |HTTP Method | CRUD Method | Result
--- | -- |-- |--|--
+-- | -- |-- |--
 `api/product` | GET | READ | Get all products
 `api/product/:id` | GET | READ | Get a single product
 `api/product`| POST | CREATE | Create a new product
