@@ -58,16 +58,16 @@ Instead, if we try to access with credentials:
 ```
 http http://127.0.0.1:8000/api/product/2 "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2MjA4Mjk1LCJqdGkiOiI4NGNhZmMzMmFiZDA0MDQ2YjZhMzFhZjJjMmRiNjUyYyIsInVzZXJfaWQiOjJ9.NJrs-sXnghAwcMsIWyCvE2RuGcQ3Hiu5p3vBmLkHSvM"
 ```
-we get the movie with id = 3
+we get the product with id = 2
 ```
-{	
-    "id": 3,
-    "name": "Triasse Paket MCU Premium",
-    "testtype": "Premium",
-    "code": "TPMP001",
-    "price": "765000",
-    "created": "2022-01-17T10:19:22.036745Z",
-    "updated": "2022-01-17T10:19:22.036745Z"
+{
+    "id": 2,
+    "name": "Triasse Paket MCU Basic",
+    "testtype": "Basic",
+    "code": "TPMB001",
+    "price": "1000",
+    "created": "2022-01-17T10:18:58.551797Z",
+    "updated": "2022-01-18T02:33:22.733927Z"
 }
 ```
 
@@ -75,14 +75,14 @@ we get the movie with id = 3
 
 First we need to create a user, so we can log in
 ```
-http POST http://127.0.0.1:8000/user/register/ email="email@email.com" username="USERNAME" password="PASSWORD" password2="PASSWORD" first_name="FIRSTNAME" last_name="LASTNAME" role="admin/customer"
+http POST http://127.0.0.1:8000/user/register email="email@email.com" username="USERNAME" password="PASSWORD" password2="PASSWORD" first_name="FIRSTNAME" last_name="LASTNAME" role="admin/customer"
 ```
 
 After we create an account we can use those credentials to get a token
 
 To get a token first we need to request
 ```
-http http://127.0.0.1:8000/user/login/ username="username" password="password"
+http http://127.0.0.1:8000/user/login username="username" password="password"
 ```
 after that, we get the token
 ```
@@ -109,31 +109,31 @@ and we will get a new access token
 ### API Product
 ```
 Get all product
-http http://127.0.0.1:8000/api/product/ "Authorization: Bearer {YOUR_TOKEN}" 
+http http://127.0.0.1:8000/api/product "Authorization: Bearer {YOUR_TOKEN}" 
 Get a single product
-http GET http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}" 
+http GET http://127.0.0.1:8000/api/product/{id} "Authorization: Bearer {YOUR_TOKEN}" 
 Create a new product
-http POST http://127.0.0.1:8000/api/product/ "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket MCU Premium" code="TPMP001" price=765000 testtype="Premium"} 
+http POST http://127.0.0.1:8000/api/product "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket MCU Premium" code="TPMP001" price=765000 testtype="Premium"} 
 Full update a product
-http PUT http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket Basic" code="TPMP002" price=100000 testtype="Basic"}
+http PUT http://127.0.0.1:8000/api/product/{id} "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket Basic" code="TPMP002" price=100000 testtype="Basic"}
 Partial update a product
-http PATCH http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket Basic"} 
+http PATCH http://127.0.0.1:8000/api/product/{id} "Authorization: Bearer {YOUR_TOKEN}" {name="Triasse Paket Basic"} 
 Delete a product
-http DELETE http://127.0.0.1:8000/api/product/{id}/ "Authorization: Bearer {YOUR_TOKEN}"
+http DELETE http://127.0.0.1:8000/api/product/{id} "Authorization: Bearer {YOUR_TOKEN}"
 ```
 ### API Transaction
 ```
 Get all transaction
-http http://127.0.0.1:8000/api/transaction/ "Authorization: Bearer {YOUR_TOKEN}" 
+http http://127.0.0.1:8000/api/transaction "Authorization: Bearer {YOUR_TOKEN}" 
 Get a single transaction
-http GET http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}" 
+http GET http://127.0.0.1:8000/api/transaction/{id} "Authorization: Bearer {YOUR_TOKEN}" 
 Create a new transaction
-http POST http://127.0.0.1:8000/api/transaction/ "Authorization: Bearer {YOUR_TOKEN}" array({productid=2 orderquantity=10},{productid=3 orderquantity=5}) 
+http POST http://127.0.0.1:8000/api/transaction "Authorization: Bearer {YOUR_TOKEN}" array({productid=2 orderquantity=10},{productid=3 orderquantity=5}) 
 Full update a transaction
-http PUT http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {userid=1 totalprice=100000}
+http PUT http://127.0.0.1:8000/api/transaction/{id} "Authorization: Bearer {YOUR_TOKEN}" {userid=1 totalprice=100000}
 Partial update a transaction
-http PATCH http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}" {userid=1}
+http PATCH http://127.0.0.1:8000/api/transaction/{id} "Authorization: Bearer {YOUR_TOKEN}" {userid=1}
 Delete a transaction
-http DELETE http://127.0.0.1:8000/api/transaction/{id}/ "Authorization: Bearer {YOUR_TOKEN}"
+http DELETE http://127.0.0.1:8000/api/transaction/{id} "Authorization: Bearer {YOUR_TOKEN}"
 ```
 
